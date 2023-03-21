@@ -69,11 +69,6 @@ class ttt:
     # Checks board to see if someone has won
     def check_complete(self):
 
-        # In case of a tie
-        if ' ' not in self.board:
-            self.complete = True
-            self.winner = 'tie'
-
         # Check rows
         self.compare_three(self.board[0,0], self.board[0,1], self.board[0,2])
         self.compare_three(self.board[1,0], self.board[1,1], self.board[1,2])
@@ -87,6 +82,12 @@ class ttt:
         # Ceck diagonals
         self.compare_three(self.board[0,0], self.board[1,1], self.board[2,2])
         self.compare_three(self.board[0,2], self.board[1,1], self.board[2,0])
+
+        # In case of a tie
+        if self.complete == False:
+            if ' ' not in self.board:
+                self.complete = True
+                self.winner = 'tie'
         
     # Checks to see if three values are all x or all o
     def compare_three(self, one, two, three):

@@ -2,7 +2,7 @@
 # The only method that MUST be implemented is move
 # The only variable that MUST be present is marker
 # Everything else can be modified
-class player:
+class agent:
 
     def __init__(self) -> None:
         #Variables
@@ -16,7 +16,6 @@ class player:
         self.gamma = None
         self.decay = None
         
-        None
     
     # Return a tuple of coordinates where the player chooses to play
     # Sample output: (0,2) or (1,1)
