@@ -6,8 +6,9 @@ import random
 # Everything else can be modified
 class human_agent:
 
-    def __init__(self):
+    def __init__(self, id):
         #Variables
+        self.id = id
         self.marker = ''
         self.all_moves = [(0,0),(0,1),(0,2),(1,0),(1,1),(1,2),(2,0),(2,1),(2,2)]
     

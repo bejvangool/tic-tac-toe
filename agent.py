@@ -4,9 +4,10 @@
 # Everything else can be modified
 class agent:
 
-    def __init__(self) -> None:
+    def __init__(self, id) -> None:
         #Variables
         self.marker = ''
+        self.id = id
 
         # Some parameters the agent might need
         self.Q = None

@@ -6,8 +6,9 @@ import random
 # Everything else can be modified
 class random_agent:
 
-    def __init__(self):
+    def __init__(self, id):
         #Variables
+        self.id = id
         self.marker = ''
     
     # Return a tuple of coordinates where the player chooses to play

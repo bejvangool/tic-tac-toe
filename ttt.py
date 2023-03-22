@@ -1,14 +1,13 @@
 import numpy as np
 import random
 
-PRINT = True
+PRINT = False
 
 class ttt:
     
     def __init__(self, player1, player2):
         # Initialize empty board
         self.board = np.full([3,3], ' ')
-        self.print_board()
         
         # X starts
         self.turn = 0
@@ -34,14 +33,15 @@ class ttt:
             # Switch turn
             self.turn = 1 - self.turn
         
-        if PRINT:
-            if self.winner == 'tie':
-                print('It\'s a tie!')
-            else:
-                winner = self.players[1-self.turn].marker
-                print(f'{winner}\'s win!')
 
-    
+        if self.winner == 'tie':
+            return 2
+        else:
+            self.winner = self.players[1-self.turn]
+            return self.winner.id
+        
+        
+
     # Complete one move
     def move(self):
         # Pick player who's turn it is
@@ -64,7 +64,6 @@ class ttt:
             player2.marker = 'x'
             player1.marker = 'o'
             return [player2, player1]
-    
 
     # Checks board to see if someone has won
     def check_complete(self):
