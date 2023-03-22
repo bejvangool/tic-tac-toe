@@ -15,27 +15,35 @@ player2 = phc_agent(1)
 read = True
 write = True
 file = 'phc_1.pkl'
+epochs = 1
+epoch_size = 10
 
 
 history = []
+
 if read:
     try:
         with open(file, 'rb') as pick:
             l = pickle.load(pick)
             player2.import_learnings(l['q'], l['pi'], l['legal'])
             history = l['history']
+            length_history = len(history)
     except:
+        print('did not work to read')
         pass
 
 #Run it
-for j in range(10):
+for j in range(epochs):
     score = [0,0,0]
-    for i in range(100000):
+    for i in range(epoch_size):
         game = ttt(player1, player2)
         winner = game.play()
         score[winner] += 1
+    print(score)
+    print(score[1])
+    print(sum(score))
     history.append(score[1]/sum(score))
-    print(f'Epoch {j+1} win percentage: {history[j]*100}')
+    print(f'Epoch {j+1} win percentage: {history[length_history + j]*100}')
 
 if write:
     with open(file, 'wb') as out:
