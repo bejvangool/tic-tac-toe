@@ -21,7 +21,7 @@ class phc_agent:
         self.alpha = 0.6
         self.expl = 0.3
         self.gamma = 0.8
-        self.delta = 0.1
+        self.delta = 0.8
         self.decay = 0.999
 
 
