@@ -5,6 +5,7 @@ from human_agent import human_agent
 from ttt import ttt
 import pickle
 import time
+from MiniMax import MiniMax
 
 
 #Select player 1
@@ -12,20 +13,17 @@ import time
 # player2 = random_agent(1)
 # player1 = human_agent(0)
 # player2 = human_agent(1)
-# player1 = phc_agent_greedy(0)
-TEACH_P1 = True
-# player2 = phc_agent_greedy(1)
-player1 = phc_agent(0)
-TEACH_P1 = True
+player1 = MiniMax(0)
+TEACH_P1 = False
 player2 = phc_agent(1)
 
-read = False
+read = True
 write = True
-file_r = 'phc_bart_scratch.pkl'
-file_w = 'phc_bart_scratch.pkl'
+file_r = 'MiniMax.py_1.pkl'
+file_w = 'MiniMax.py_1.pkl'
 epochs = 100
 
-epoch_size = 10000
+epoch_size = 1000
 
 
 win_hist = []
@@ -57,6 +55,8 @@ for j in range(epochs):
         game = ttt(player1, player2)
         winner = game.play()
         score[winner] += 1
+        if i % (epoch_size/100) == 0:
+            print("Loading: ", j, ".", (i * 100) / epoch_size, "%")
     #print(f"Downloaded the tutorial in {time.perf_counter() - tic:0.4f} seconds")
 
     win_hist.append(score[1]/sum(score))

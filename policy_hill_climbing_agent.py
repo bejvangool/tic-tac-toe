@@ -7,6 +7,8 @@ import copy
     # Add to Q/pi/legal
 # Pick a move from legal moves
 
+PRINT = False
+
 class phc_agent:
 
     def __init__(self, id):
@@ -68,7 +70,8 @@ class phc_agent:
                 totalp += state_pi[i]
                 if totalp >= num2:
                     move = i
-                    print(move, state_pi)
+                    if PRINT:
+                        print(move, state_pi)
                     break
         
         return move
