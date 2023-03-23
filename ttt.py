@@ -76,7 +76,7 @@ class ttt:
         # Check columns
         self.compare_three(self.board[0,0], self.board[1,0], self.board[2,0])
         self.compare_three(self.board[0,1], self.board[1,1], self.board[2,1])
-        self.compare_three(self.board[0,1], self.board[1,1], self.board[2,1])
+        self.compare_three(self.board[0,2], self.board[1,2], self.board[2,2])
 
         # Ceck diagonals
         self.compare_three(self.board[0,0], self.board[1,1], self.board[2,2])

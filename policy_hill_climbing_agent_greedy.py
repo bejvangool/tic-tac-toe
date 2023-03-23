@@ -7,7 +7,7 @@ import copy
     # Add to Q/pi/legal
 # Pick a move from legal moves
 
-class phc_agent:
+class phc_agent_greedy:
 
     def __init__(self, id):
         self.id = id
@@ -19,9 +19,9 @@ class phc_agent:
         self.all_moves = [(0,0),(0,1),(0,2),(1,0),(1,1),(1,2),(2,0),(2,1),(2,2)]
 
         self.alpha = 0.8
-        self.expl = 0.2
+        self.expl = 0.25
         self.gamma = 0.9
-        self.delta = 1
+        self.delta = 0.8
         self.decay = 0.999
 
 
@@ -35,7 +35,7 @@ class phc_agent:
         
 
         # Find the move
-        move = self.select_move(state)
+        move = self.select_move_greedy(state)
         move_idx = self.legal[state][move]
         coord = self.all_moves[move_idx]
 
@@ -51,7 +51,8 @@ class phc_agent:
 
         return board
     
-    def select_move(self, state):
+    
+    def select_move_greedy(self, state):
 
         # See if we explore
         num = random.uniform(0,1)
@@ -61,14 +62,13 @@ class phc_agent:
 
         # Otherwise pick a pi with probability dist
         else:
-            state_pi = self.pi[state]
-            totalp = 0
-            num2 = random.uniform(0,1)
-            for i in range(len(state_pi)):
-                totalp += state_pi[i]
-                if totalp >= num2:
+            state_q = self.Q[state]
+            maxQ = -1
+            move = -1
+            for i in range(len(state_q)):
+                if state_q[i] > maxQ:
+                    maxQ = state_q[i]
                     move = i
-                    break
         
         return move
 
@@ -110,10 +110,10 @@ class phc_agent:
         else:
             x = -self.delta/(9-1)
         
-        # self.pi[state][action] == x
+        self.pi[state][action] == x
 
-        # sumA = sum(self.pi[state])
-        # self.pi[state] = [a/sumA for a in self.pi[state]]
+        sumA = sum(self.pi[state])
+        self.pi[state] = [a/sumA for a in self.pi[state]]
 
 
     def translate_board(self, board):
@@ -146,7 +146,7 @@ class phc_agent:
                 self.legal[state] = legal
                 n = len(legal)
                 self.Q[state] = [0]*n
-                # self.pi[state] = [1/n]*n
+                self.pi[state] = [1/n]*n
         
         return state
 
