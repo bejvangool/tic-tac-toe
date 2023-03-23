@@ -1,7 +1,7 @@
 import numpy as np
 import random
 
-PRINT = False
+PRINT = True
 
 class ttt:
     

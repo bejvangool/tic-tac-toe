@@ -19,9 +19,9 @@ class phc_agent:
         self.all_moves = [(0,0),(0,1),(0,2),(1,0),(1,1),(1,2),(2,0),(2,1),(2,2)]
 
         self.alpha = 0.8
-        self.expl = 0.2
+        self.expl = 0
         self.gamma = 0.9
-        self.delta = 1
+        self.delta = 0.7
         self.decay = 0.999
 
 
@@ -68,6 +68,7 @@ class phc_agent:
                 totalp += state_pi[i]
                 if totalp >= num2:
                     move = i
+                    print(move, state_pi)
                     break
         
         return move
@@ -89,10 +90,10 @@ class phc_agent:
         sums.append(board[0,0] + board[1,1] + board[2,2])
         sums.append(board[2,0] + board[1,1] + board[0,2])
 
-        if -2 in sums: # Opponent can win in 1 turn
-            reward = -1
-        elif 3 in sums: # We just won
+        if 3 in sums: # Opponent can win in 1 turn
             reward = 1
+        elif -2 in sums: # We just won
+            reward = -1
         
         return reward
 
@@ -110,11 +111,12 @@ class phc_agent:
         else:
             x = -self.delta/(9-1)
         
-        # self.pi[state][action] == x
+        self.pi[state][action] = self.pi[state][action]+x
 
-        # sumA = sum(self.pi[state])
-        # self.pi[state] = [a/sumA for a in self.pi[state]]
-
+        sumA = sum(self.pi[state])
+        # print('before:', self.pi[state])
+        self.pi[state] = [max(0, a/sumA) for a in self.pi[state]]
+        # print('after:', self.pi[state])
 
     def translate_board(self, board):
         board2 = np.full([3,3], -1)
@@ -146,7 +148,7 @@ class phc_agent:
                 self.legal[state] = legal
                 n = len(legal)
                 self.Q[state] = [0]*n
-                # self.pi[state] = [1/n]*n
+                self.pi[state] = [1/n]*n
         
         return state
 

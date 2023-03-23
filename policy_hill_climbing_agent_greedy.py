@@ -19,7 +19,7 @@ class phc_agent_greedy:
         self.all_moves = [(0,0),(0,1),(0,2),(1,0),(1,1),(1,2),(2,0),(2,1),(2,2)]
 
         self.alpha = 0.8
-        self.expl = 0.2
+        self.expl = 0
         self.gamma = 0.9
         self.delta = 0.8
         self.decay = 0.999
@@ -92,7 +92,7 @@ class phc_agent_greedy:
         if 3 in sums: # We just won
             reward = 1
         elif -2 in sums: # Opponent can win in 1 turn
-            reward = -1
+            reward = -2
         
         return reward
 
@@ -102,18 +102,6 @@ class phc_agent_greedy:
         
         maxQ = max(self.Q[state2])
         self.Q[state][action] = (1-self.alpha) * self.Q[state][action] + self.alpha*(reward+self.gamma*maxQ)
-
-        maxA = self.Q[state].index(max(self.Q[state]))
-
-        if maxA == action:
-            x = self.delta
-        else:
-            x = -self.delta/(9-1)
-        
-        self.pi[state][action] == x
-
-        sumA = sum(self.pi[state])
-        self.pi[state] = [a/sumA for a in self.pi[state]]
 
 
     def translate_board(self, board):

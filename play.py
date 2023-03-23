@@ -12,14 +12,17 @@ import time
 # player2 = random_agent(1)
 # player1 = human_agent(0)
 # player2 = human_agent(1)
-player1 = phc_agent_greedy(0)
-TEACH_P1 = False
-player2 = phc_agent_greedy(1)
+# player1 = phc_agent_greedy(0)
+TEACH_P1 = True
+# player2 = phc_agent_greedy(1)
+player1 = phc_agent(0)
+TEACH_P1 = True
+player2 = phc_agent(1)
 
 read = False
-write = False
-file_r = 'phcgg_bart_1.pkl'
-file_w = 'phcgg_bart_1.pkl'
+write = True
+file_r = 'phc_bart_scratch.pkl'
+file_w = 'phc_bart_scratch.pkl'
 epochs = 100
 
 epoch_size = 10000
