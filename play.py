@@ -19,8 +19,8 @@ player2 = phc_agent(1)
 
 read = True
 write = True
-file_r = 'MiniMaxVsPhc.py_1.pkl'
-file_w = 'MiniMaxVsPhc.py_1.pkl'
+file_r = 'MiniMaxVsphc_agent.py_1.pkl'
+file_w = 'MiniMaxVsphc_agent.py_1.pkl'
 epochs = 100
 
 epoch_size = 1000
