@@ -19,7 +19,7 @@ class phc_agent_greedy:
         self.all_moves = [(0,0),(0,1),(0,2),(1,0),(1,1),(1,2),(2,0),(2,1),(2,2)]
 
         self.alpha = 0.8
-        self.expl = 0.25
+        self.expl = 0.2
         self.gamma = 0.9
         self.delta = 0.8
         self.decay = 0.999
@@ -89,10 +89,10 @@ class phc_agent_greedy:
         sums.append(board[0,0] + board[1,1] + board[2,2])
         sums.append(board[2,0] + board[1,1] + board[0,2])
 
-        if -2 in sums: # Opponent can win in 1 turn
-            reward = -1
-        elif 3 in sums: # We just won
+        if 3 in sums: # We just won
             reward = 1
+        elif -2 in sums: # Opponent can win in 1 turn
+            reward = -1
         
         return reward
 
